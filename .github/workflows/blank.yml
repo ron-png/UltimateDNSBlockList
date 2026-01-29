@@ -45,7 +45,7 @@ jobs:
           echo "! Title: BigBlockList" > header.txt
           echo "! Version: $new_version" >> header.txt
           echo "! Last modified: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> header.txt
-          echo "! Sources: AdGuard DNS Filter, OISD Big" >> header.txt
+          echo "! Sources: $(paste -s -d, sources.txt)" >> header.txt
           echo "!" >> header.txt
 
           # Download and Clean
