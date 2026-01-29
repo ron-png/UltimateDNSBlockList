@@ -49,9 +49,9 @@ jobs:
           echo "!" >> header.txt
 
           # Download and Clean
-          # Strip lines starting with ! or [
-          curl -s "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt" | grep -v -e "^!" -e "^\[" > file1.txt
-          curl -s "https://big.oisd.nl" | grep -v -e "^!" -e "^\[" > file2.txt
+          # Strip lines starting with ! or #
+          curl -s "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt" | grep -v -e "^!" -e "^#" > file1.txt
+          curl -s "https://big.oisd.nl" | grep -v -e "^!" -e "^#" > file2.txt
           
           # Combine
           sort -u file1.txt file2.txt > combined_unsorted.txt
