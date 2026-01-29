@@ -15,7 +15,7 @@ BigBlockList is an automatically updated aggregation of high-quality blocklists.
 
 ## 📦 Sources
 
-This list combines the following trusted sources:
+This list combines the following sources:
 
 - **[AdGuard DNS Filter](https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt)**: A comprehensive filter composed of several other filters (AdGuard Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList, and EasyPrivacy) specifically simplified to be compatible with DNS-level ad blocking.
 - **[OISD Big](https://big.oisd.nl)**: A massive, highly-regarded blocklist that focuses heavily on not breaking valid services.
