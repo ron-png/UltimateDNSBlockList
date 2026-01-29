@@ -34,28 +34,49 @@ jobs:
       - name: Update Blocklist
         run: |
           mkdir -p list
-          curl -s "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt" > file1.txt
-          curl -s "https://big.oisd.nl" > file2.txt
-          curl -s "https://raw.githubusercontent.com/bigblocklist/bigblocklist/main/do_not_block" > do_not_block
           
+          # Increment Version
+          if [ ! -f version.txt ]; then echo "0.00" > version.txt; fi
+          current_version=$(cat version.txt)
+          new_version=$(awk "BEGIN {printf \"%.2f\", $current_version + 0.01}")
+          echo $new_version > version.txt
+
+          # Create Header
+          echo "! Title: BigBlockList" > header.txt
+          echo "! Version: $new_version" >> header.txt
+          echo "! Last modified: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> header.txt
+          echo "! Sources: AdGuard DNS Filter, OISD Big" >> header.txt
+          echo "!" >> header.txt
+
+          # Download and Clean
+          # Strip lines starting with ! or [
+          curl -s "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt" | grep -v -e "^!" -e "^\[" > file1.txt
+          curl -s "https://big.oisd.nl" | grep -v -e "^!" -e "^\[" > file2.txt
+          
+          # Combine
           sort -u file1.txt file2.txt > combined_unsorted.txt
           
+          # Apply Allowlist
           if [ -f "do_not_block" ]; then
-            grep -vFx -f do_not_block combined_unsorted.txt > list/bigblocklist.txt
+            grep -vFx -f do_not_block combined_unsorted.txt > combined_cleaned.txt
           else
-            mv combined_unsorted.txt list/bigblocklist.txt
+            mv combined_unsorted.txt combined_cleaned.txt
           fi
           
-          rm file1.txt file2.txt combined_unsorted.txt
+          # Final Output
+          cat header.txt combined_cleaned.txt > list/bigblocklist.txt
+          
+          # Cleanup
+          rm file1.txt file2.txt combined_unsorted.txt combined_cleaned.txt header.txt
 
       # Comit and push changes if there are any
       - name: Commit and Push
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add list/bigblocklist.txt
+          git add list/bigblocklist.txt version.txt
           if [[ -n $(git status -s) ]]; then
-            git commit -m "Update bigblocklist.txt"
+            git commit -m "Update bigblocklist.txt to version $(cat version.txt)"
             git push
           else
             echo "No changes to commit"
