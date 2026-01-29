@@ -36,8 +36,15 @@ jobs:
           mkdir -p list
           curl -s "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt" > file1.txt
           curl -s "https://big.oisd.nl" > file2.txt
-          sort -u file1.txt file2.txt > list/bigblocklist.txt
-          rm file1.txt file2.txt
+          sort -u file1.txt file2.txt > combined_unsorted.txt
+          
+          if [ -f "do_not_block" ]; then
+            grep -vFx -f do_not_block combined_unsorted.txt > list/bigblocklist.txt
+          else
+            mv combined_unsorted.txt list/bigblocklist.txt
+          fi
+          
+          rm file1.txt file2.txt combined_unsorted.txt
 
       # Comit and push changes if there are any
       - name: Commit and Push
