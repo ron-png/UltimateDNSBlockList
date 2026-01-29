@@ -49,12 +49,18 @@ jobs:
           echo "!" >> header.txt
 
           # Download and Clean
-          # Strip lines starting with !, #, or [
-          curl -s "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt" | grep -v -e "^!" -e "^#" -e "^\[" > file1.txt
-          curl -s "https://big.oisd.nl" | grep -v -e "^!" -e "^#" -e "^\[" > file2.txt
+          # Loop through sources.txt, download, and clean each list
+          touch combined_temp.txt
+          while IFS= read -r url || [ -n "$url" ]; do
+            if [ -n "$url" ]; then
+              echo "Downloading $url"
+              # Download, strip comments (!, #, [), and append to temp file
+              curl -s "$url" | grep -v -e "^!" -e "^#" -e "^\[" >> combined_temp.txt
+            fi
+          done < sources.txt
           
           # Combine
-          sort -u file1.txt file2.txt > combined_unsorted.txt
+          sort -u combined_temp.txt > combined_unsorted.txt
           
           # Apply Allowlist
           if [ -f "do_not_block" ]; then
@@ -67,7 +73,7 @@ jobs:
           cat header.txt combined_cleaned.txt > list/bigblocklist.txt
           
           # Cleanup
-          rm file1.txt file2.txt combined_unsorted.txt combined_cleaned.txt header.txt
+          rm combined_temp.txt combined_unsorted.txt combined_cleaned.txt header.txt
 
       # Comit and push changes if there are any
       - name: Commit and Push
