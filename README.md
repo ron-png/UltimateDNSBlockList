@@ -1,6 +1,6 @@
 # 🛡️ BigBlockList
 
-**A balanced, high-performance DNS blocklist designed for a seamless web experience.**
+**A balanced DNS blocklist designed for a seamless web experience.**
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/ron-png/BigBlockList)
 ![GitHub license](https://img.shields.io/github/license/ron-png/BigBlockList)
