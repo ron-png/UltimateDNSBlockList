@@ -32,3 +32,9 @@ https://raw.githubusercontent.com/ron-png/BigBlockList/main/list/bigblocklist.tx
 ```
 
 Add this URL to your Pi-hole, AdGuard Home, or any other DNS blocker.
+
+## 🤝 Contributing
+
+- **Upstream Changes:** You can suggest a change to the upstream blocklist provider directly.
+- **False Positives:** You can suggest the exact line from the blocklist that needs to be unblocked, so it can be added to `do_not_block`.
+  - *Note:* Please open an issue with proper proof and steps to reproduce.
