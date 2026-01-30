@@ -68,9 +68,10 @@ jobs:
           sort -u combined_temp.txt > combined_unsorted.txt
           
           # Apply Allowlist
-          if [ -f "do_not_block" ]; then
-            # Clean allowlist (remove whitespace and empty lines)
-            sed 's/^[[:space:]]*//;s/[[:space:]]*$//' do_not_block | sed '/^$/d' > do_not_block_clean
+          if [ -f "do_not_block_temporary" ]; then
+            # Clean allowlist (remove whitespace, empty lines, and dates)
+            # Remove comments (dates) starting with #
+            sed 's/ *#.*//' do_not_block_temporary | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sed '/^$/d' > do_not_block_clean
             grep -vFx -f do_not_block_clean combined_unsorted.txt > combined_cleaned.txt
             rm do_not_block_clean
           else
