@@ -36,6 +36,5 @@ Add this URL to your Pi-hole, AdGuard Home, or any other DNS blocker.
 ## 🤝 Contributing
 
 - **Add an Entry:** Please suggest any change to the upstream blocklist provider directly. I currently don't plan to maintain my own list.
-- **False Positives:** You can suggest the exact line from the blocklist that needs to be unblocked.
-  - Unblocks are added to `do_not_block_temporary` and are removed after 3 months. Therefore **you must suggest the change to the upstream list provider to fix it permanently.**
+- **False Positives:** Please suggest any change to the upstream blocklist provider directly. I currently don't plan to maintain my own list.
 - **Recommend a List:** You can suggest a blocklist to be added to the UltimateDNSBlockList. Just open an issue or pull request.
