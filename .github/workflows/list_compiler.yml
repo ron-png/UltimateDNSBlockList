@@ -45,6 +45,11 @@ jobs:
               echo "! Source: $line" >> header.txt
             fi
           done < sources.txt
+          # Add Spacing
+          echo "!" >> header.txt
+          echo "!" >> header.txt
+          echo "!" >> header.txt
+          echo "! Begin Blocklist:" >> header.txt
           echo "!" >> header.txt
 
           # Download and Clean
@@ -53,13 +58,15 @@ jobs:
           while IFS= read -r url || [ -n "$url" ]; do
             if [ -n "$url" ]; then
               echo "Downloading $url"
-              # Download, strip comments (!, #, [), and append to temp file
-              curl -s "$url" | grep -v -e "^!" -e "^#" -e "^\[" >> combined_temp.txt
+              # Download and append to temp file
+              curl -s "$url" >> combined_temp.txt
             fi
           done < sources.txt
           
           # Combine
-          sort -u combined_temp.txt > combined_unsorted.txt
+          awk '!seen[$0]++' combined_temp.txt > combined_unsorted.txt
+
+
           
           # Apply Allowlist
           if [ -f "do_not_block_temporary" ]; then
