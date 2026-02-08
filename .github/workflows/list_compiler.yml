@@ -47,10 +47,6 @@ jobs:
           done < sources.txt
           # Add Spacing
           echo "!" >> header.txt
-          echo "!" >> header.txt
-          echo "!" >> header.txt
-          echo "! Begin Blocklist:" >> header.txt
-          echo "!" >> header.txt
 
           # Download and Clean
           # Loop through sources.txt, download, and clean each list
@@ -81,7 +77,13 @@ jobs:
 
           # Add Count to Header
           line_count=$(wc -l < combined_cleaned.txt | xargs)
-          echo "! Count: $line_count" >> header.txt
+          echo "! Line Count: $line_count" >> header.txt
+
+          # Add Spacing
+          echo "!" >> header.txt
+          echo "!" >> header.txt
+          echo "! Begin Blocklist:" >> header.txt
+          echo "!" >> header.txt
           
           # Final Output
           cat header.txt combined_cleaned.txt > list/UltimateDNSBlockList.txt
