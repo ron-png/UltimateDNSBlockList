@@ -41,9 +41,11 @@ jobs:
           echo "! Version: $new_version" >> header.txt
           echo "! Last modified: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> header.txt
           echo "! License: https://github.com/${{ github.repository }}/blob/main/LICENSE" >> header.txt
+          echo "!" >> header.txt
+          echo "Sources:" >> header.txt
           while IFS= read -r line || [ -n "$line" ]; do
             if [ -n "$line" ]; then
-              echo "! Source: $line" >> header.txt
+              echo "! $line" >> header.txt
             fi
           done < sources.txt
           # Add Spacing
