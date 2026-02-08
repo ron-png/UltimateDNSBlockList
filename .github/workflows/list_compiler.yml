@@ -69,12 +69,12 @@ jobs:
 
           
           # Apply Allowlist
-          if [ -f "do_not_block_temporary" ]; then
+          if [ -f "allowlist_temporary" ]; then
             # Clean allowlist (remove whitespace, empty lines, and dates)
             # Remove comments (dates) starting with #
-            sed 's/ *#.*//' do_not_block_temporary | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sed '/^$/d' > do_not_block_clean
-            grep -vFx -f do_not_block_clean combined_unsorted.txt > combined_cleaned.txt
-            rm do_not_block_clean
+            sed 's/ *#.*//' allowlist_temporary | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sed '/^$/d' > allowlist_clean
+            grep -vFx -f allowlist_clean combined_unsorted.txt > combined_cleaned.txt
+            rm allowlist_clean
           else
             mv combined_unsorted.txt combined_cleaned.txt
           fi

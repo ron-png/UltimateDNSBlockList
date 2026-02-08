@@ -16,15 +16,15 @@ jobs:
 
       - name: Remove old entries
         run: |
-          if [ -f "do_not_block_temporary" ]; then
+          if [ -f "allowlist_temporary" ]; then
             # Calculate cutoff date (3 months ago)
             cutoff_date=$(date -d "3 months ago" +%s)
             
             # Temporary file for valid entries
-            echo "# Temporary Allowlist" > do_not_block_temporary.tmp
-            echo "# Add entries one per line. Copy and paste the exact entry from the blocklist." >> do_not_block_temporary.tmp
-            echo "# Entries are automatically removed after 90 days." >> do_not_block_temporary.tmp
-            echo "# To permanently fix a false positive, please contribute to the upstream lists." >> do_not_block_temporary.tmp
+            echo "# Temporary Allowlist" > allowlist_temporary.tmp
+            echo "# Add entries one per line. Copy and paste the exact entry from the blocklist." >> allowlist_temporary.tmp
+            echo "# Entries are automatically removed after 90 days." >> allowlist_temporary.tmp
+            echo "# To permanently fix a false positive, please contribute to the upstream lists." >> allowlist_temporary.tmp
             
             while IFS= read -r line || [ -n "$line" ]; do
               # Skip empty lines
@@ -42,26 +42,26 @@ jobs:
                 
                 # Check if entry is newer than cutoff
                 if [ "$entry_date" -ge "$cutoff_date" ]; then
-                  echo "$line" >> do_not_block_temporary.tmp
+                  echo "$line" >> allowlist_temporary.tmp
                 else
                   echo "Removing old entry: $line"
                 fi
               else
                  # If no date found, add the current date
-                 echo "$line # $(date +%Y-%m-%d)" >> do_not_block_temporary.tmp
+                 echo "$line # $(date +%Y-%m-%d)" >> allowlist_temporary.tmp
               fi
-            done < do_not_block_temporary
+            done < allowlist_temporary
             
-            mv do_not_block_temporary.tmp do_not_block_temporary
+            mv allowlist_temporary.tmp allowlist_temporary
           fi
 
       - name: Commit and Push
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add do_not_block_temporary
+          git add allowlist_temporary
           if [[ -n $(git status -s) ]]; then
-            git commit -m "Cleanup do_not_block_temporary"
+            git commit -m "Cleanup allowlist_temporary"
             git push
           else
             echo "No changes to commit"
