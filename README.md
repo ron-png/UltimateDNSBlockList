@@ -1,6 +1,6 @@
 # 🛡️ UltimateDNSBlockList
 
-**A balanced DNS blocklist designed for a seamless web experience.**
+**The only DNS blocklist you will ever need.**
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/ron-png/BigBlockList)
 ![GitHub license](https://img.shields.io/github/license/ron-png/BigBlockList)
