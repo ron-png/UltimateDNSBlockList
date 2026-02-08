@@ -82,10 +82,10 @@ jobs:
           # Add Count to Header
           line_count=$(wc -l < combined_cleaned.txt | xargs)
           echo "! Line Count: $line_count" >> header.txt
+          echo "!" >> header.txt
 
           # Add Spacing
           echo "! ========== Begin Blocklist ==========" >> header.txt
-          echo "!" >> header.txt
           
           # Final Output
           cat header.txt combined_cleaned.txt > list/UltimateDNSBlockList.txt
