@@ -21,18 +21,17 @@ jobs:
             cutoff_date=$(date -d "3 months ago" +%s)
             
             # Temporary file for valid entries
-            touch do_not_block_temporary.tmp
+            echo "# Temporary Allowlist" > do_not_block_temporary.tmp
+            echo "# Add entries one per line. Copy and paste the exact entry from the blocklist." >> do_not_block_temporary.tmp
+            echo "# Entries are automatically removed after 90 days." >> do_not_block_temporary.tmp
+            echo "# To permanently fix a false positive, please contribute to the upstream lists." >> do_not_block_temporary.tmp
             
             while IFS= read -r line || [ -n "$line" ]; do
               # Skip empty lines
               if [ -z "$line" ]; then continue; fi
               
-              # Check for example.org
-              if echo "$line" | grep -q "||example.org^"; then
-                 # Always update example.org to current date
-                 echo "||example.org^ # $(date +%Y-%m-%d)" >> do_not_block_temporary.tmp
-                 continue
-              fi
+              # Skip comment lines (headers)
+              if [[ "$line" == \#* ]]; then continue; fi
 
               # Extract date from line (assumes format: rule # YYYY-MM-DD)
               entry_date_str=$(echo "$line" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}$' || true)
