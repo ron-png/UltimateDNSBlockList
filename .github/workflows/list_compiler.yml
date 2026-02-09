@@ -37,7 +37,7 @@ jobs:
 
           # Create Header
           echo "! Title: UltimateDNSBlockList" > header.txt
-          echo "! Description: A combination of fire and forget DNS blocklists merged into the ultimate one." >> header.txt
+          echo "! Description: The only DNS blocklist you will ever need." >> header.txt
           echo "! Version: $new_version" >> header.txt
           echo "! Last modified: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> header.txt
           echo "! License: https://github.com/${{ github.repository }}/blob/main/LICENSE" >> header.txt
