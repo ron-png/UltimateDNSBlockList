@@ -11,7 +11,7 @@ UltimateDNSBlockList is an automatically updated aggregation of high-quality blo
 
 ### 🎯 Philosophy
 
-> **Usability First:** I believe that online protection shouldn't come at the cost of usability. This list is carefully curated to minimize false positives, ensuring that your internet works exactly as expected—just cleaner and safer.
+**Usability First:** I believe that online protection shouldn't come at the cost of usability. This list is carefully curated to minimize false positives, ensuring that your internet works exactly as expected—just cleaner and safer.
 
 ## 📦 Sources
 
