@@ -19,6 +19,7 @@ This list combines the following sources:
 
 - **[AdGuard DNS Filter](https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt)**: A comprehensive filter composed of several other filters (AdGuard Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList, and EasyPrivacy) specifically simplified to be compatible with DNS-level ad blocking. [Report false positive](https://reports.adguard.com/en/new_issue.html)
 - **[OISD Big](https://big.oisd.nl)**: A massive, highly-regarded blocklist that focuses heavily on not breaking valid services. [Report false positive](https://oisd.nl/report)
+- **[HaGeZi DNS Rebind Protection](https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adguard/dns-rebind-protection.txt)**: A preventative blocklist to protect against DNS rebinding attacks. [Report false positive](https://github.com/hagezi/dns-blocklists/issues)
 
 ## 🔄 Updates
 
